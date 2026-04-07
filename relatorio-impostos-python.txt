@@ -1,0 +1,113 @@
+#Relatório de Impostos por Loja
+
+#Relatório de impostos de duas lojas, com base em listas de preços.
+
+#Gera um relatório consolidado, contendo:
+
+#imposto total por loja
+#total combinado
+#classificação de carga tributária
+# Regra de imposto (com função)
+#até 1000 → 10%
+#acima de 1000 → 15%
+#acima de 1500 → 20%
+
+
+#🔹 Dados iniciais:
+
+lista_loja1 = [1500, 1000, 800, 2000]
+lista_loja2 = [500, 4000, 3200, 2600, 1000]
+
+
+#🔹 Parte 1 — Função de imposto
+
+#def definir_taxa_imposto(preco):
+
+#👉 Retorna a taxa correta.
+
+def definir_taxa_imposto(preco):
+    if preco > 1500:
+        taxa = 0.20
+    elif preco > 1000:
+        taxa = 0.15
+    else:
+        taxa = 0.10     
+    return taxa  
+
+#🔹 Parte 2 — Função de cálculo total
+
+#somar os impostos
+
+def calcular_imposto_total(lista_precos):
+    imposto_total = 0
+    for preco in lista_precos:
+       taxa_imposto = definir_taxa_imposto(preco)
+       imposto = preco * taxa_imposto
+       imposto_total = imposto_total + imposto
+    return imposto_total
+
+
+#🔹 Parte 3 — Cálculo principal
+
+imposto_loja1 = calcular_imposto_total(lista_loja1)
+imposto_loja2 = calcular_imposto_total(lista_loja2)
+
+
+#🔹 Parte 4 — Total geral
+
+imposto_total_geral = imposto_loja1 + imposto_loja2
+
+
+#🔹 Parte 5 — Classificação 
+
+#Regra:
+
+#≥ 2000 → "Alta carga tributária"
+#≥ 1000 → "Carga tributária média"
+#< 1000 → "Baixa carga tributária"
+
+#👉 Usando if / elif / else
+
+
+if imposto_total_geral >= 2000:
+    classificacao = "Alta carga tributária"
+elif imposto_total_geral >= 1000:
+    classificacao = "Carga tributária média"
+else:
+    classificacao = "Baixa carga tributária"
+
+
+#🔹 Parte 6 — Saída final
+
+#imprimi exatamente assim:
+
+#RELATÓRIO DE IMPOSTOS
+
+#Imposto Loja 1: R$X.XXX,XX
+#Imposto Loja 2: R$X.XXX,XX
+
+#Total de impostos: R$X.XXX,XX
+
+#Classificação: XXXXX
+
+
+print()
+print("RELATÓRIO DE IMPOSTOS")
+print()
+print(f"Imposto Loja 1: R${imposto_loja1:,.2f}")
+print(f"Imposto Loja 2: R${imposto_loja2:,.2f}")
+print()
+print(f"Total de impostos: R${imposto_total_geral:,.2f}")
+print()
+print(f"Classificação: {classificacao}")
+print()
+
+
+#🔹 Parte 7 — Função extra
+
+def mensagem_final():
+    print("Relatório gerado com sucesso")
+
+mensagem_final()
+
+print()
